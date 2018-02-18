@@ -1,7 +1,17 @@
+buildscript {
+    ext.kotlin_version = '1.2.21'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
 plugins {
     id 'com.github.johnrengelman.shadow' version '1.2.4'
 }
 apply plugin: 'java'
+apply plugin: 'kotlin'
 apply plugin: 'application'
 
 ext.buildType = "windows"
@@ -22,6 +32,7 @@ dependencies {
     compile cscoreDep()
     compile files('lib/pathfinder.jar')
     compile 'org.opencv:opencv-java:3.1.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
 jar {
@@ -113,4 +124,15 @@ run.dependsOn unzipOpenCv
 
 clean {
     delete outputDirectory
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
