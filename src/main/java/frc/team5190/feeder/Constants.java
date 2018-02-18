@@ -5,5 +5,5 @@ public class Constants {
     public static final double MAX_VELOCITY = 7.0;
     public static final double MAX_ACCELERATION = 5.0;
     public static final double MAX_JERK = 60.0;
-    public static final double WHEEL_WIDTH = 28;          // inches
+    public static final double WHEEL_WIDTH = 29.5;          // inches
 }
