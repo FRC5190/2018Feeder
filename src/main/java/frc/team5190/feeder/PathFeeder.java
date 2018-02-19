@@ -27,6 +27,15 @@ class PathFeeder implements ITableListener, IRemoteConnectionListener {
         pathfinderOutputTable = NetworkTable.getTable("pathfinderOutput");
         pathfinderInputTable.addTableListener(this, true);
         NetworkTable.addGlobalConnectionListener(this, true);
+
+        // delete any old requests pending
+        for (int i = 0; i < 20; i++) {
+            pathfinderInputTable.delete("request_" + i);
+            pathfinderInputTable.delete("folder_" + i);
+            pathfinderInputTable.delete("path_" + i);
+            pathfinderInputTable.delete("obstructed_" + i);
+            pathfinderInputTable.delete("index_" + i);
+        }
     }
 
     @Override

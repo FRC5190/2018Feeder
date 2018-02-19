@@ -9,7 +9,7 @@ object FileWriter {
     @JvmStatic
     fun main(args: Array<String>) {
 
-        val folderpaths = arrayOf(arrayOf("CS-L", "Switch", "Center"), arrayOf("CS-R", "Switch", "Center"), arrayOf("LS-LL", "Scale"), arrayOf("LS-LR", "Switch"), arrayOf("LS-RR", "Scale"))
+        val folderpaths = arrayOf(arrayOf("CS-L", "Switch", "Center", "Switch 2"), arrayOf("CS-R", "Switch", "Center", "Switch 2"), arrayOf("LS-LL", "Scale"), arrayOf("LS-LR", "Switch"), arrayOf("LS-RR", "Scale"))
 
         for (folderpath in folderpaths) {
             for (j in 1 until folderpath.size) {
@@ -18,13 +18,11 @@ object FileWriter {
 
                     val reader = InputStreamReader(ClassLoader.getSystemResourceAsStream(folderpath[0] + "/" + folderpath[j] + ".bot"))
                     val bufferedReader = BufferedReader(reader)
-
                     val trajectories = arrayOfNulls<Trajectory>(2)
 
                     println("Processing " + folderpath[0] + "/" + folderpath[j])
 
                     var line = bufferedReader.readLine()
-
                     while (line != null) {
 
                         val tokenize = line.split(",".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
