@@ -30,7 +30,7 @@ object FileWriter {
                             waypoints.add(Waypoint(
                                     (tokenize[0]).toDouble(),
                                     (tokenize[1]).toDouble(),
-                                    (tokenize[2]).toDouble()))
+                                    (Pathfinder.d2r((tokenize[2].toDouble())))))
                         }
                         line = bufferedReader.readLine()
                     }
