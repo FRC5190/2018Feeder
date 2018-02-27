@@ -20,7 +20,6 @@ object FileWriter {
                     val bufferedReader = BufferedReader(reader)
                     val trajectories = arrayOfNulls<Trajectory>(2)
 
-                    println("Processing " + folderpath[0] + "/" + folderpath[j])
 
                     var line = bufferedReader.readLine()
                     while (line != null) {
@@ -36,15 +35,17 @@ object FileWriter {
                     }
 
                     val config = Trajectory.Config(
-                            Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH,
-                            Constants.TIME_DELTA, Constants.MAX_VELOCITY,
-                            Constants.MAX_ACCELERATION, Constants.MAX_JERK)
+                            Trajectory.FitMethod.HERMITE_QUINTIC, Trajectory.Config.SAMPLES_HIGH,
+                            Constants.TIME_DELTA, 6.5,
+                            5.0, Constants.MAX_JERK)
                     val trajectory = Pathfinder.generate(waypoints.toTypedArray(), config)
                     val modifier = TankModifier(trajectory)
                     modifier.modify(Constants.WHEEL_WIDTH / 12.0)
 
                     trajectories[0] = modifier.leftTrajectory
                     trajectories[1] = modifier.rightTrajectory
+
+                    println("Processing " + folderpath[0] + "/" + folderpath[j])
 
                     Pathfinder.writeToCSV(File("folders/" + folderpath[0] + "/" + folderpath[j] + " Left Detailed.csv"), trajectories[0])
                     Pathfinder.writeToCSV(File("folders/" + folderpath[0] + "/" + folderpath[j] + " Right Detailed.csv"), trajectories[1])

@@ -90,7 +90,7 @@ class PathFeeder implements ITableListener, IRemoteConnectionListener {
         // 2 - generate the profiles
         try {
             Trajectory.Config config = new Trajectory.Config(
-                    Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH,
+                    Trajectory.FitMethod.HERMITE_QUINTIC, Trajectory.Config.SAMPLES_HIGH,
                     Constants.TIME_DELTA, Constants.MAX_VELOCITY,
                     Constants.MAX_ACCELERATION, Constants.MAX_JERK);
             Trajectory trajectory = Pathfinder.generate(wayPoints.toArray(new Waypoint[0]), config);
