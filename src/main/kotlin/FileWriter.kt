@@ -36,8 +36,8 @@ object FileWriter {
 
                     val config = Trajectory.Config(
                             Trajectory.FitMethod.HERMITE_QUINTIC, Trajectory.Config.SAMPLES_HIGH,
-                            Constants.TIME_DELTA, 6.5,
-                            5.0, Constants.MAX_JERK)
+                            Constants.TIME_DELTA, 7.5,
+                            4.0, Constants.MAX_JERK)
                     val trajectory = Pathfinder.generate(waypoints.toTypedArray(), config)
                     val modifier = TankModifier(trajectory)
                     modifier.modify(Constants.WHEEL_WIDTH / 12.0)
