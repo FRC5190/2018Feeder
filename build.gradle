@@ -28,11 +28,14 @@ repositories {
 }
 
 dependencies {
-    compile ntcoreDep()
+    compile "edu.wpi.first.ntcore:ntcore-java:+"
+    compile "edu.wpi.first.wpiutil:wpiutil-java:+"
     compile cscoreDep()
     compile files('lib/pathfinder.jar')
     compile 'org.opencv:opencv-java:3.1.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile 'com.github.salomonbrys.kotson:kotson:2.5.0'
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.11.2'
 }
 
 jar {
