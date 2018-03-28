@@ -26,16 +26,6 @@ object PathFeeder {
 
     private val gson = Gson()
 
-    enum class DriveBase {
-        TANK,
-        SWERVE
-    }
-
-    enum class Units {
-        IMPERIAL,
-        METRIC
-    }
-
     init {
         pathfinderInputTable.addEntryListener({ table, key, entry, value, flags ->
             val request = gson.fromJson<PathRequest>(value.string)
