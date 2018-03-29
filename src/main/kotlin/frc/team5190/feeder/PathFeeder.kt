@@ -28,7 +28,7 @@ object PathFeeder {
             val folderName = request.folderName
             val fileName = request.fileName
 
-            val filePath = "$folderName/$fileName.bot"
+            val filePath = "$folderName/$fileName.xml"
 
             display.background = Color.YELLOW
             println("Received request: $folderName/$fileName")
