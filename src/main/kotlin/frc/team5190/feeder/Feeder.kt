@@ -6,7 +6,10 @@ object Feeder {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        NetworkTableInstance.getDefault().startClientTeam(5190)
+        with(NetworkTableInstance.getDefault()) {
+            startClientTeam(5190)
+            setUpdateRate(0.02)
+        }
         /* NetworkTable.setClientMode()
          NetworkTable.setTeam(5190)
          NetworkTable.setIPAddress("10.51.90.2")

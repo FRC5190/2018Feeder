@@ -2,19 +2,14 @@ package frc.team5190.feeder
 
 import com.github.salomonbrys.kotson.fromJson
 import com.google.gson.Gson
-import edu.wpi.first.networktables.EntryListenerFlags
 import edu.wpi.first.networktables.NetworkTableInstance
-import jaci.pathfinder.Pathfinder
-import jaci.pathfinder.Trajectory
+import jaci.pathfinder.*
 import jaci.pathfinder.Trajectory.FitMethod
-import jaci.pathfinder.Waypoint
 import jaci.pathfinder.modifiers.TankModifier
 import org.jsoup.Jsoup
 import org.jsoup.parser.Parser
 import java.awt.Color
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.IOException
+import java.io.*
 
 
 object PathFeeder {
@@ -28,6 +23,7 @@ object PathFeeder {
 
     init {
         pathfinderInputTable.addEntryListener({ table, key, entry, value, flags ->
+            println("In $key $value")
             val request = gson.fromJson<PathRequest>(value.string)
             val folderName = request.folderName
             val fileName = request.fileName
@@ -96,13 +92,11 @@ object PathFeeder {
 
             println("Processed request: $folderName/$fileName")
             display.background = Color.GREEN
-        }, EntryListenerFlags.kImmediate)
+        }, 0)
 
         NetworkTableInstance.getDefault().addConnectionListener({
             display.background = if (it.connected) Color.GREEN else Color.RED
         }, true)
-
-        pathfinderInputTable.keys.forEach { pathfinderInputTable.delete(it) }
     }
 
     class PathRequest(val folderName: String, val fileName: String)
