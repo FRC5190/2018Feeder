@@ -2,6 +2,7 @@ package frc.team5190.feeder
 
 import com.github.salomonbrys.kotson.fromJson
 import com.google.gson.Gson
+import edu.wpi.first.networktables.EntryListenerFlags
 import edu.wpi.first.networktables.NetworkTableInstance
 import jaci.pathfinder.*
 import jaci.pathfinder.Trajectory.FitMethod
