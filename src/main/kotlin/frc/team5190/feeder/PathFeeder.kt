@@ -4,13 +4,16 @@ import com.github.salomonbrys.kotson.fromJson
 import com.google.gson.Gson
 import edu.wpi.first.networktables.EntryListenerFlags
 import edu.wpi.first.networktables.NetworkTableInstance
-import jaci.pathfinder.*
+import jaci.pathfinder.Pathfinder
+import jaci.pathfinder.Trajectory
 import jaci.pathfinder.Trajectory.FitMethod
+import jaci.pathfinder.Waypoint
 import jaci.pathfinder.modifiers.TankModifier
 import org.jsoup.Jsoup
 import org.jsoup.parser.Parser
 import java.awt.Color
-import java.io.*
+import java.io.FileNotFoundException
+import java.io.IOException
 
 
 object PathFeeder {
@@ -37,7 +40,8 @@ object PathFeeder {
 
             // serialize and publish the responses
             try {
-                pathfinderOutputTable.getEntry("${key.substring(0, key.lastIndexOf('_'))}_response").setString(gson.toJson(trajectories))
+                pathfinderOutputTable.getEntry("${key.substring(0, key.lastIndexOf('_'))}_response").forceSetString(gson.toJson(trajectories))
+                NetworkTableInstance.getDefault().flush()
             } catch (e: Exception) {
                 display.background = Color.BLACK
                 display.title = e.message
@@ -58,7 +62,9 @@ object PathFeeder {
         val filePath = "$folderName/$fileName.xml"
 
         val doc = try {
-            Jsoup.parse(File(filePath).readText(), "", Parser.xmlParser())!!
+            Jsoup.parse(javaClass.classLoader.getResourceAsStream(filePath).use {
+                it.bufferedReader().readText()
+            }, "", Parser.xmlParser())!!
         } catch (e: FileNotFoundException) {
             display.background = Color.BLACK
             display.title = e.message
