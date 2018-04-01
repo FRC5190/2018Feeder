@@ -1,15 +1,16 @@
 import frc.team5190.feeder.PathFeeder
-import jaci.pathfinder.*
-import jaci.pathfinder.modifiers.TankModifier
-import java.io.*
-import java.util.*
+import jaci.pathfinder.Pathfinder
+import java.io.File
 
 object FileWriter {
 
     @JvmStatic
     fun main(args: Array<String>) {
 
-        val folderpaths = arrayOf(arrayOf("CS-L", "Switch", "Center", "Switch 2"), arrayOf("CS-R", "Switch", "Center", "Switch 2"), arrayOf("LS-LL", "Scale"), arrayOf("LS-LR", "Switch"), arrayOf("LS-RR", "Scale"))
+        val folderpaths = arrayOf(arrayOf("CS-L", "Drop First Cube", "Pickup Second Cube"),
+                arrayOf("CS-R", "Drop First Cube"),
+                arrayOf("LS-LL", "Drop First Cube", "Pickup Second Cube", "Pickup Third Cube"),
+                arrayOf("LS-RR", "Drop First Cube"))
 
         for (folderpath in folderpaths) {
             for (j in 1 until folderpath.size) {
@@ -26,6 +27,5 @@ object FileWriter {
 
             }
         }
-
     }
 }
