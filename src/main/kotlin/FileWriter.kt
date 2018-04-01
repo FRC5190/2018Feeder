@@ -13,6 +13,7 @@ object FileWriter {
                 arrayOf("LS-RR", "Drop First Cube"))
 
         for (folderpath in folderpaths) {
+            File("folders/" + folderpath[0]).mkdirs()
             for (j in 1 until folderpath.size) {
                 try {
                     val trajectories = PathFeeder.generatePath(folderpath[0], folderpath[j])!!
